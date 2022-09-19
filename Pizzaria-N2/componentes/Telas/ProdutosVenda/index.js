@@ -9,7 +9,6 @@ import ProdutoVenda from '../../ProdutoVenda';
 import {
     obtemTodasCategorias,
     adicionarProdutoCarrinho,
-    adicionarVenda,
     obtemTodosProdutosVenda
 } from './services/ProdutosVenda/dbservices';
 

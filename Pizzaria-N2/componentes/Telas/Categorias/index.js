@@ -155,7 +155,7 @@ export default function Categorias() {
         console.log(id)
         const categoria = categorias.find(categoria => categoria.id == id);
         console.log(categoria);
-        Alert.alert('Atenção', `Confirma a remoção da categoria ${categoria.id}?`,
+        Alert.alert('Atenção', `Confirma a remoção da categoria ${categoria.descricao}?`,
             [
                 {
                     text: 'Sim',
@@ -172,11 +172,11 @@ export default function Categorias() {
 
     async function removerCategoria(id) {
         try {
-            await excluiProduto(id);
+            await excluirCategoria(id);
             Keyboard.dismiss();
             limparCampos();
             await carregaDados();
-            alert(`Produto ${id} apagado com sucesso!!!`);
+            alert(`Categoria ${id} apagada com sucesso!!!`);
         } catch (e) {
             Alert.alert(e);
         }

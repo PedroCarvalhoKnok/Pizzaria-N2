@@ -4,13 +4,12 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import styles from './styles';
-import Carrinho from '../../Carrinho';
+import styles from './ItensVenda/';
 import {
-    obtemTodositensCarrinho,
-    adicionarVenda,
-    excluiItem
-} from './services/Carrinho/dbservices';
+    obtemDadosUnitariosTodasVendas,
+    obtemProdutosPorVenda,
+} from './services/Vendas/dbservices';
+import Venda from '../../Venda';
 
 
 
@@ -20,8 +19,7 @@ export default function Carrinho() {
     const [descricaoProduto, setDescricaoProduto] = useState();
     const [idProduto, setIdProduto] = useState();
     const [dataVenda, setDataVenda] = useState();
-    const [itensCarrinho, setItensCarrinho] = useState([])
-    let tabelasCriadas = false;
+    const [vendas, setVendas] = useState([])
 
     useEffect(
         () => {
@@ -42,134 +40,40 @@ export default function Carrinho() {
 
     }
 
-    function dataFormatada() {
-        var dataAtual = new Date();
-        var data = dataAtual.getDay() + "/" + dataAtual.getMonth()
-            + "/" + dataAtual.getFullYear() + " "
-            + dataAtual.getHours() + ":"
-            + dataAtual.getMinutes() + ":" + dataAtual.getSeconds();
-
-        return data
-    }
-
-
-    async function efetivarVenda() {
-
-        try {
-
-            itensCarrinho.forEach(async item => {
-
-                let vendaObj = {
-                    id: criarNovoId(),
-                    idProduto: item.idProduto,
-                    descricaoProduto: item.descricaoProduto,
-                    precoUnitarioProduto: item.precoUnitarioProduto,
-                    dataVenda: dataFormatada()
-                };
-
-                let resposta = (await adicionarVenda(produtoVendaObj));
-
-                if (resposta)
-                    Alert.alert(`${produtoVendaObj} adicionada com sucesso!`);
-                else
-                    Alert.alert('Falhou miseravelmente!');
-
-                console.log(vendaObj)
-
-            });
-
-            Keyboard.dismiss();
-            alert('Dados salvos com sucesso!!!');
-            await carregaDados();
-        }
-        catch (e) {
-            Alert.alert(e);
-        }
-
-    }
-
-    function confirmaEfetivarVenda() {
-
-        Alert.alert('Atenção', `Confirma a efetivação da venda?`,
-            [
-                {
-                    text: 'Sim',
-                    onPress: () => efetivarVenda(),
-                },
-                {
-                    text: 'Não',
-                    style: 'cancel',
-                }
-            ])
-
-    }
-
-    function confirmaRemoverItem(id) {
-        console.log(id)
-        const item = itensCarrinho.find(item => item.id == id);
-        console.log(item);
-        Alert.alert('Atenção', `Confirma a remoção do item ${item.descricao}?`,
-            [
-                {
-                    text: 'Sim',
-                    onPress: () => removerItem(id),
-                },
-                {
-                    text: 'Não',
-                    style: 'cancel',
-                }
-            ])
-
-
-    }
-
-    async function removerItem(id) {
-
-        try {
-            await excluiItem(id);
-            Keyboard.dismiss();
-            await carregaDados();
-            alert(`Item ${id} apagado com sucesso!!!`);
-        } catch (e) {
-            alert(e);
-        }
-
-
-    }
-
 
     async function carregaDados() {
         try {
 
-            await obtemTodositensCarrinho().then((carrinhoResponse) => {
+            await obtemDadosUnitariosTodasVendas().then((dadosResponse) => {
+                
+                let dadosVendas = dadosResponse;
 
-                let itensCarrinho = carrinhoResponse;
-                console.log(itensCarrinho)
-                setItensCarrinho(itensCarrinho);
+                console.log(dadosVendas);
+
+                dadosVendas.forEach(async venda => {
+                    let produtos = await obtemProdutosPorVenda(venda.id);
+                    let precoTotal = produtos.map(produto => produto.precoUnitarioProduto).reduce((acc, amount) => acc + amount);
+                    vendas.push({id: venda.id, produtos: produtos, precoTotal: precoTotal, dataVenda: venda.dataVenda})
+                });
+
+                setVendas(vendas);
             })
 
 
         } catch (e) {
-            alert(e);
+            Alert.alert(e);
         }
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Meu Carrinho</Text>
-
-
-            <View style={styles.sideBtns}>
-
-                <TouchableOpacity onPress={async () => { confirmaEfetivarVenda() }} style={styles.btnSalvar}><Text>Efetivar Venda</Text></TouchableOpacity>
-
-            </View>
+            <Text style={styles.mainTitle}>Minhas Compras</Text>
 
             <ScrollView>
                 {
-                    setItensCarrinho.map((item, index) =>
+                    vendas.map((venda, index) =>
                     (
-                        <Carrinho item={item} key={index.toString()} confirmaRemoverItem={confirmaRemoverItem}></Carrinho>
+                        <Venda venda={venda} produtos={venda.produtos} key={index.toString()}></Venda>
                     ))
                 }
             </ScrollView>

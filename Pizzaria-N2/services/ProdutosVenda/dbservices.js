@@ -101,27 +101,6 @@ export function adicionarProdutoCarrinho(produto) {
 }
 
 
-export function adicionarVenda(venda, produto) {
-
-    return new Promise((resolve, reject) => {
-        let query = 'insert into tbVendas(id, idProduto ,descricaoProduto, dataVenda) values (?,?,?,?)';
-        let dbCx = getDbConnection();
-
-        dbCx.transaction(tx => {
-            tx.executeSql(query, [venda.id, produto.id, produto.descricao, venda.dataVenda],
-                (tx, resultado) => {
-                    resolve(resultado.rowsAffected > 0);
-                })
-        },
-            error => {
-                console.log(error);
-                resolve(false);
-            }
-        )
-    }
-    );
-}
-
 
 
 

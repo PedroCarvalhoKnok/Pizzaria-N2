@@ -24,6 +24,7 @@ export async function createTables() {
             idProduto text not null,
             descricaoProduto text not null,
             precoUnitarioProduto real not null,
+            categoriaProduto text not null,
             dataVenda text not null
         )`;
 
