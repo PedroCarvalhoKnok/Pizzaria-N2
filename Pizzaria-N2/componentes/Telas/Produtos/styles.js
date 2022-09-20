@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#143ec9',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     txtInput: {
         width: '70%',
-        height: 50,
+        height: 40,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 10,
@@ -24,8 +24,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderBottomWidth: 5,
         borderBottomColor: '#5eb528',
-        marginTop:10
+        marginTop: 10
 
+    },
+    pickerStyle: {
+        borderWidth: 1,
+        borderColor: 'black',
+        width: '70%',
+        textAlign: 'center',
+        justifyContent: 'center'
     },
     mainTitle: {
         fontSize: 25,
@@ -47,7 +54,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         color: 'white',
         alignItems: 'center',
-        
+
     },
     btnCarregar: {
         width: 100,
@@ -63,13 +70,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "center",
         width: '50%'
-        
+
     },
     sideBtns: {
         flexDirection: 'row',
         justifyContent: "space-between",
     },
-    areaBtns:{
+    areaBtns: {
         marginTop: 0,
         justifyContent: "space-between",
         flexDirection: 'column',
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         shadowColor: "#000",
-        
+
     },
     listaCampo: {
         width: '50%',
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
     dadosBotoesAcao: {
         width: '42%',
         flexDirection: 'row',
-        
+
     },
 
 

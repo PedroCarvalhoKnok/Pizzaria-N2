@@ -87,7 +87,7 @@ export function adicionaProduto(produto) {
         let dbCx = getDbConnection();
 
         dbCx.transaction(tx => {
-            tx.executeSql(query, [chamado.id, produto.descricao, produto.precoUnitario, produto.categoria],
+            tx.executeSql(query, [produto.id, produto.descricao, produto.precoUnitario, produto.categoria],
                 (tx, resultado) => {
                     resolve(resultado.rowsAffected > 0);
                 })
@@ -122,29 +122,6 @@ export function alteraProduto(produto) {
     }
     );
 }
-
-export function alteraStatusAtentido(chamado) {
-    console.log('começando o método alterachamadostatusatendido');
-    chamado.situacao = 'Atendido';
-    return new Promise((resolve, reject) => {
-        let query = 'update tbProdutos set situacao=? where id=?';
-        let dbCx = getDbConnection();
-
-        dbCx.transaction(tx => {
-            tx.executeSql(query, [chamado.situacao, chamado.id],
-                (tx, resultado) => {
-                    resolve(resultado.rowsAffected > 0);
-                })
-        },
-            error => {
-                console.log(error);
-                resolve(false);
-            }
-        )
-    }
-    );
-}
-
 
 
 export function excluiProduto(id) {

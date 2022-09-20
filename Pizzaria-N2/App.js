@@ -5,7 +5,7 @@ import Produtos from './componentes/Telas/Produtos/index';
 import ProdutosVenda from './componentes/Telas/ProdutosVenda/index';
 import Vendas from './componentes/Telas/Vendas/index';
 import Categorias from './componentes/Telas/Categorias/index';
-import Carrinho from './componentes/Telas/Carrinho/index';
+import Carrinhos from './componentes/Telas/Carrinho/index';
 
 
 const Routes = createAppContainer(
@@ -14,7 +14,7 @@ const Routes = createAppContainer(
     Produtos,
     ProdutosVenda,
     Vendas,
-    Carrinho,
+    Carrinhos,
     Categorias,
   })
 );

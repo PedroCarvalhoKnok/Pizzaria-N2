@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import styles from './componentes/Categoria/styles';
+import styles from './styles';
 import Categoria from '../../Categoria';
 import {
     obtemTodasCategorias,
@@ -12,12 +12,12 @@ import {
     alterarCategoria,
     excluirCategoria,
     excluirTodasCategorias
-} from './services/Categorias/dbservices';
+} from '../../../services/Categoria/dbservices';
 
 
 
 
-export default function Categorias() {
+export default function Categorias({navigation}) {
     const [id, setId] = useState();
     const [descricao, setDescricao] = useState();
     const [categorias, setCategorias] = useState([])
@@ -62,7 +62,7 @@ export default function Categorias() {
                 let resposta = (await adicionarCategoria(categoriaObj));
 
                 if (resposta)
-                    Alert.alert(`${categoriaObj} adicionado com sucesso!`);
+                    Alert.alert(`${categoriaObj.descricao} adicionado com sucesso!`);
                 else
                     Alert.alert('Falhou miseravelmente!');
             }
@@ -185,6 +185,10 @@ export default function Categorias() {
     return (
         <View style={styles.container}>
             <Text style={styles.mainTitle}>Gerenciamento de Categorias</Text>
+            <TouchableOpacity style={styles.botao}
+                onPress={() => navigation.navigate('Home')}>
+                <Text>Menu</Text>
+            </TouchableOpacity>
 
             <View style={styles.areaBtns}>
 

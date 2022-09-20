@@ -12,20 +12,21 @@ export default function ProdutoVenda({ produtoVenda, adicionarCarrinho }) {
 
 
             <View>
-                <Text style={styles.listaNome}> {produtoVenda.id}</Text>
-                <Text style={styles.listaNome}> {produtoVenda.dataVenda}</Text>
+                <Text style={styles.listaNome}>Preço Unitário</Text>
+                <Text style={styles.listaNome}>{produtoVenda.precoUnitario}</Text>
             </View>
 
             <View>
-            <Text style={styles.listaNome}> {produtoVenda.idProduto}</Text>
-            <Text style={styles.listaNome}> {produtoVenda.descricaoProduto}</Text>
-            <Text style={styles.listaNome}> {produtoVenda.categoria}</Text>
+            <Text style={styles.listaNome}>Descrição</Text>
+            <Text style={styles.listaNome}>{produtoVenda.descricao}</Text>
+            <Text style={styles.listaNome}>Categoria</Text>
+            <Text style={styles.listaNome}>{produtoVenda.categoria}</Text>
             </View>
 
             <View style={styles.dadosBotoesAcao}>
                
                 <TouchableOpacity onPress={() => adicionarCarrinho(produtoVenda)}>
-                    <MaterialIcons name="delete" size={32} color="red" />
+                    <MaterialIcons name="add-shopping-cart" size={32} color="white" />
                 </TouchableOpacity>
 
             </View>

@@ -10,7 +10,6 @@ import {
   Keyboard,
   Button,
   Alert,
-  Picker,
 } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,15 +22,14 @@ import {
   adicionarVenda,
   excluiItem,
   limparCarrinho,
-} from "./services/Carrinho/dbservices";
+} from "../../../services/Carrinho/dbservices";
 
-export default function Carrinho() {
+export default function Carrinhos({ navigation }) {
   const [id, setId] = useState();
   const [descricaoProduto, setDescricaoProduto] = useState();
   const [idProduto, setIdProduto] = useState();
   const [dataVenda, setDataVenda] = useState();
   const [itensCarrinho, setItensCarrinho] = useState([]);
-  let tabelasCriadas = false;
 
   useEffect(() => {
     processamentoUseEffect();
@@ -50,9 +48,9 @@ export default function Carrinho() {
   function dataFormatada() {
     var dataAtual = new Date();
     var data =
-      dataAtual.getDay() +
+      dataAtual.getDate() +
       "/" +
-      dataAtual.getMonth() +
+      formataMes(dataAtual.getMonth() + 1) +
       "/" +
       dataAtual.getFullYear() +
       " " +
@@ -65,6 +63,11 @@ export default function Carrinho() {
     return data;
   }
 
+  function formataMes(mes){
+    return mes = mes < 10 ? `0${mes}`: mes;
+    
+  }
+
   async function efetivarVenda() {
 
     try {
@@ -73,22 +76,32 @@ export default function Carrinho() {
 
       itensCarrinho.forEach(async (item) => {
 
+        console.log({
+          id: idVenda,
+          idProduto: item.id,
+          descricaoProduto: item.descricao,
+          precoUnitarioProduto: item.precoUnitario,
+          categoriaProduto: item.categoria,
+          dataVenda: dataVenda,
+        });
+        
+
         let resposta = await adicionarVenda({
           id: idVenda,
-          idProduto: item.idProduto,
-          descricaoProduto: item.descricaoProduto,
-          precoUnitarioProduto: item.precoUnitarioProduto,
+          idProduto: item.id,
+          descricaoProduto: item.descricao,
+          precoUnitarioProduto: item.precoUnitario,
+          categoriaProduto: item.categoria,
           dataVenda: dataVenda,
         });
 
-        if (resposta) {
-          let limparCarrinho = await limparCarrinho();
-          limparCarrinho
-            ? Alert.alert("Compra efetivada com sucesso")
-            : Alert.alert("Não foi possível efetivar a compra");
-        } else Alert.alert("Falhou miseravelmente!");
-
-        console.log(vendaObj);
+        if (resposta){
+           Alert.alert(`${item.descricao} inserido com sucesso.` );
+           await removerItem(item.id)
+        }
+        else 
+           Alert.alert(`${item.descricao} não foi inserido corretamente!`);
+       
       });
 
       Keyboard.dismiss();
@@ -116,7 +129,7 @@ export default function Carrinho() {
     console.log(id);
     const item = itensCarrinho.find((item) => item.id == id);
     console.log(item);
-    Alert.alert("Atenção", `Confirma a remoção do item ${item.descricao} do carrinho?`, [
+    Alert.alert("Atenção", `Confirma a remoção do item ${item.descricao} ${item.categoria} do carrinho?`, [
       {
         text: "Sim",
         onPress: () => removerItem(id),
@@ -129,7 +142,7 @@ export default function Carrinho() {
   }
 
   function confirmaLimparCarrinho() {
-    
+
     Alert.alert("Atenção", `Confirma a limpeza de todo o carrinho?`, [
       {
         text: "Sim",
@@ -142,7 +155,7 @@ export default function Carrinho() {
     ]);
   }
 
-  async function efetivarLimparCarrinho(){
+  async function efetivarLimparCarrinho() {
     try {
       await limparCarrinho();
       Keyboard.dismiss();
@@ -153,7 +166,7 @@ export default function Carrinho() {
     }
   }
 
-  
+
 
   async function removerItem(id) {
     try {
@@ -181,6 +194,10 @@ export default function Carrinho() {
   return (
     <View style={styles.container}>
       <Text style={styles.mainTitle}>Meu Carrinho</Text>
+      <TouchableOpacity style={styles.botao}
+        onPress={() => navigation.navigate('Home')}>
+        <Text>Menu</Text>
+      </TouchableOpacity>
 
       <View style={styles.sideBtns}>
         <TouchableOpacity
@@ -199,18 +216,18 @@ export default function Carrinho() {
         >
           <Text>Limpar Carrinho</Text>
         </TouchableOpacity>
-      </View>
+        </View>
 
-      <ScrollView>
-        {itensCarrinho.map((item, index) => (
-          <Carrinho
-            item={item}
-            key={index.toString()}
-            confirmaRemoverItem={confirmaRemoverItem}
-          ></Carrinho>
-        ))}
-      </ScrollView>
-      <StatusBar style="auto" />
-    </View>
-  );
+        <ScrollView>
+          {itensCarrinho.map((item, index) => (
+            <Carrinho
+              item={item}
+              key={index.toString()}
+              confirmaRemoverItem={confirmaRemoverItem}
+            ></Carrinho>
+          ))}
+        </ScrollView>
+        <StatusBar style="auto" />
+      </View>
+      );
 }

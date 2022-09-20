@@ -13,7 +13,7 @@ export function obtemDadosUnitariosTodasVendas() {
 
         let dbCx = getDbConnection();
         dbCx.transaction(tx => {
-            let query = `select id, dataVenda from tbVendas`;
+            let query = `select distinct id, dataVenda from tbVendas`;
             tx.executeSql(query, [],
                 (tx, registros) => {
 
@@ -23,9 +23,6 @@ export function obtemDadosUnitariosTodasVendas() {
                         let obj = {
                             id: registros.rows.item(n).id,
                             dataVenda: registros.rows.item(n).dataVenda
-                            // descricao: registros.rows.item(n).descricao,
-                            // precoUnitario: registros.rows.item(n).precoUnitario,
-                            // categoria: registros.rows.item(n).categoria
                         }
                         retorno.push(obj);
                     }

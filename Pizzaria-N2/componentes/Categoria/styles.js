@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-between",
         height: 80,
-        width: '100%',
+        width: '80%',
         alignItems: 'center',
         margin: 10,
         borderRadius: 10,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     dadosBotoesAcao: {
-        width: '42%',
+        width: '40%',
         flexDirection: 'row',
         
     },

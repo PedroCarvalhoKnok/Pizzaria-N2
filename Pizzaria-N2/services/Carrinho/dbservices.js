@@ -55,14 +55,14 @@ export function excluiItem(id) {
 }
 
 export function limparCarrinho() {
-  console.log("Limpando carrinho: " + id);
+  console.log("Limpando carrinho: ");
   return new Promise((resolve, reject) => {
     let query = "delete from tbCarrinho";
     let dbCx = getDbConnection();
 
     dbCx.transaction(
       (tx) => {
-        tx.executeSql(query, [id], (tx, resultado) => {
+        tx.executeSql(query, [], (tx, resultado) => {
           resolve(resultado.rowsAffected > 0);
         });
       },
@@ -89,7 +89,7 @@ export function adicionarVenda(produtoVenda) {
             produtoVenda.idProduto,
             produtoVenda.descricaoProduto,
             produtoVenda.precoUnitarioProduto,
-            produtoVenda.categoria,
+            produtoVenda.categoriaProduto,
             produtoVenda.dataVenda,
           ],
           (tx, resultado) => {

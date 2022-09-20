@@ -1,10 +1,10 @@
-import { react } from 'react';
+import { react, useState, useEffect  } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 import {
     createTables
-} from './services/Home/dbservices';
+} from '../../../services/Home/dbservices';
 
 export default function Home({ navigation }) {
 
@@ -24,7 +24,7 @@ export default function Home({ navigation }) {
         }
 
         console.log("UseEffect...");
-        await carregaDados();
+        
     }
 
     return (
@@ -48,7 +48,7 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.botao}
-                onPress={() => navigation.navigate('Carrinho')}>
+                onPress={() => navigation.navigate('Carrinhos')}>
                 <Text>Carrinho</Text>
             </TouchableOpacity>
 

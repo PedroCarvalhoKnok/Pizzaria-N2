@@ -10,17 +10,25 @@ export default function Venda({ venda, produtos }) {
       <View>
         <Text style={styles.listaNome}>Venda {venda.id}</Text>
       </View>
+     
+
+      <View>
+        <Text style={styles.listaNome}>Itens vendidos</Text>
+      </View>
 
       <ScrollView>
         {produtos.map((produto, index) => (
-          <ItensVenda produto={produto}></ItensVenda>
+          <ItensVenda key={index} produto={produto}></ItensVenda>
         ))}
       </ScrollView>
+
 
       <View>
         <Text style={styles.listaNome}>Preço Total: {venda.precoTotal}</Text>
         <Text style={styles.listaNome}>Data da venda: {venda.dataVenda}</Text>
       </View>
+
+     
     </View>
   );
 }

@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-community/datetimepicker": "6.2.0",
+    "@react-native-picker/picker": "^2.4.2",
     "cd": "^0.3.3",
     "expo": "~46.0.9",
     "expo-dev-client": "~1.2.1",
@@ -24,6 +25,7 @@
     "react-native-awesome-alerts": "^2.0.0",
     "react-native-date-picker": "^4.2.5",
     "react-native-datetimepicker-modal": "^1.0.1",
+    "react-native-gesture-handler": "^2.6.1",
     "react-native-text-input-mask": "^3.1.4",
     "react-native-web": "^0.18.7",
     "react-navigation": "^4.4.4"

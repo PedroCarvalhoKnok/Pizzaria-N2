@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#143ec9',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -75,6 +75,23 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: "100%",
         alignItems: 'center'
+    },
+    btnCarregar: {
+        width: 100,
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: "blue",
+        justifyContent: "center",
+        alignContent: "center",
+        color: 'white',
+        alignItems: 'center'
+    },
+    pickerStyle: {
+        borderWidth: 1,
+        borderColor: 'black',
+        width: '70%',
+        textAlign: 'center',
+        justifyContent: 'center'
     },
     usuario: {
         backgroundColor: '#ed8f1c',

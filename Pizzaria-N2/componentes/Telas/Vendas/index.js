@@ -4,17 +4,18 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import styles from './ItensVenda/';
+import styles from './styles';
 import {
     obtemDadosUnitariosTodasVendas,
     obtemProdutosPorVenda,
-} from './services/Vendas/dbservices';
+} from '../../../services/Vendas/dbservices';
+
 import Venda from '../../Venda';
 
 
 
 
-export default function Carrinho() {
+export default function Vendas({navigation}) {
     const [id, setId] = useState();
     const [descricaoProduto, setDescricaoProduto] = useState();
     const [idProduto, setIdProduto] = useState();
@@ -24,40 +25,46 @@ export default function Carrinho() {
     useEffect(
         () => {
             processamentoUseEffect();
-            console.log('useEffect');
         }, []);
 
 
     async function processamentoUseEffect() {
-
-        console.log("UseEffect...");
+        console.log('carrega dados chamado');
         await carregaDados();
     }
 
-    function criarNovoId() {
-
-        return Date.now().toString(36) + Math.random().toString(36).slice(0, 2);
-
-    }
 
 
     async function carregaDados() {
         try {
 
+            let produtosFim = []
+
             await obtemDadosUnitariosTodasVendas().then((dadosResponse) => {
+                
                 
                 let dadosVendas = dadosResponse;
 
-                console.log(dadosVendas);
+                
 
                 dadosVendas.forEach(async venda => {
                     let produtos = await obtemProdutosPorVenda(venda.id);
-                    let precoTotal = produtos.map(produto => produto.precoUnitarioProduto).reduce((acc, amount) => acc + amount);
-                    vendas.push({id: venda.id, produtos: produtos, precoTotal: precoTotal, dataVenda: venda.dataVenda})
-                });
 
-                setVendas(vendas);
-            })
+                    produtosFim = produtos;
+
+                    console.log(produtosFim)
+                    
+                    // let precoTotal = produtos.map(produto => produto.precoUnitarioProduto).reduce((acc, amount) => acc + amount);
+                    
+                    // vendas.push({id: venda.id, produtos: produtos, precoTotal: precoTotal, dataVenda: venda.dataVenda})
+                    
+                });
+               
+            });
+
+            //console.log(produtosFim);
+
+            //setVendas(vendas);
 
 
         } catch (e) {
@@ -67,7 +74,11 @@ export default function Carrinho() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Minhas Compras</Text>
+            <Text style={styles.mainTitle}>Minhas Vendas</Text>
+            <TouchableOpacity style={styles.botao}
+                onPress={() => navigation.navigate('Home')}>
+                <Text>Menu</Text>
+            </TouchableOpacity>
 
             <ScrollView>
                 {

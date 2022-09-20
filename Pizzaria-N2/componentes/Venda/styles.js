@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
     },
     usuario: {
         backgroundColor: '#ed8f1c',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: "space-between",
-        height: 80,
+        height: 300,
         width: '100%',
         alignItems: 'center',
         margin: 10,

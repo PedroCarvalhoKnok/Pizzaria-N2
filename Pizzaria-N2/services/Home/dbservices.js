@@ -20,7 +20,7 @@ export async function createTables() {
 
         const queryTbVendas = `CREATE TABLE IF NOT EXISTS tbVendas
         (
-            id text not null primary key,
+            id text not null,
             idProduto text not null,
             descricaoProduto text not null,
             precoUnitarioProduto real not null,
@@ -41,6 +41,8 @@ export async function createTables() {
             id text not null primary key,
             descricao text not null
         )`;
+
+
 
         let dbCx = getDbConnection();
         dbCx.transaction(tx => {

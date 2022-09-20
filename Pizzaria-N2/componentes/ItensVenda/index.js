@@ -6,9 +6,7 @@ import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
 export default function ItensVenda({ produto }) {
   return (
     <View style={styles.usuario}>
-      <View>
-        <Text style={styles.listaNome}>Itens vendidos</Text>
-      </View>
+      
 
       <View>
         <Text style={styles.listaNome}>Descrição: {produto.descricaoProduto}</Text>

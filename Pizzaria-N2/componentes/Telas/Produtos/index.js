@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Keyboard, Button, Alert, Picker } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Keyboard, Button, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import styles from './componentes/Produto/styles';
+import styles from './styles';
 import Produto from '../../Produto';
 import {
     obtemTodosProdutos,
@@ -13,12 +14,12 @@ import {
     excluiProduto,
     excluiTodosProdutos,
     obtemTodasCategorias
-} from './services/Produtos/dbservices';
+} from '../../../services/Produtos/dbservices';
 
 
 
 
-export default function Produtos() {
+export default function Produtos({ navigation }) {
     const [id, setId] = useState();
     const [descricao, setDescricao] = useState();
     const [precoUnitario, setPrecoUnitario] = useState();
@@ -38,7 +39,7 @@ export default function Produtos() {
 
         console.log("UseEffect...");
         await carregaDados();
-        
+
     }
 
     function criarNovoId() {
@@ -49,6 +50,8 @@ export default function Produtos() {
 
 
     async function salvarProduto() {
+
+        console.log('teste' + id)
 
         let novoRegistro = id == undefined;
 
@@ -62,7 +65,7 @@ export default function Produtos() {
             categoria: categoria
         };
 
-        console.log(chamadoObj)
+        console.log(produtoObj)
 
         try {
             if (novoRegistro) {
@@ -105,6 +108,10 @@ export default function Produtos() {
 
                 let categorias = categoriasResponse;
                 console.log(categorias)
+
+                if(categorias.length > 0)
+                    setCategoria(categorias[0].descricao);
+
                 setCategorias(categorias);
             })
 
@@ -119,7 +126,7 @@ export default function Produtos() {
         if (produtoEdit != undefined) {
             setId(produtoEdit.id);
             setDescricao(produtoEdit.descricao);
-            setPrecoUnitario(produtoEdit.precoUnitario);
+            setPrecoUnitario(produtoEdit.precoUnitario.toString());
             setCategoria(produtoEdit.categoria);
         }
 
@@ -166,24 +173,12 @@ export default function Produtos() {
 
     }
 
-    //   async function alteraStatusChamado(chamado){
-
-    //     let resposta = (await alteraStatusAtentido(chamado));
-
-    //     if (resposta)
-    //       alert(`${chamado.id} teve seu status atualizado para atendido!`);
-    //     else
-    //       alert('Falhou miseravelmente!');
-
-    //     await carregaDados();
-
-    //   }
 
     function apagaElemento(id) {
         console.log(id)
         const produto = produtos.find(produto => produto.id == id);
         console.log(produto);
-        Alert.alert('Atenção', `Confirma a remoção do produto ${produto.id}?`,
+        Alert.alert('Atenção', `Confirma a remoção do produto ${produto.descricao}?`,
             [
                 {
                     text: 'Sim',
@@ -224,6 +219,10 @@ export default function Produtos() {
     return (
         <View style={styles.container}>
             <Text style={styles.mainTitle}>Gerenciamento de Produtos</Text>
+            <TouchableOpacity style={styles.botao}
+                onPress={() => navigation.navigate('Home')}>
+                <Text>Menu</Text>
+            </TouchableOpacity>
 
             <View style={styles.areaBtns}>
                 <Text style={styles.legend}>Descrição</Text>
@@ -237,21 +236,23 @@ export default function Produtos() {
                 <Text style={styles.legend}>Preço unitário</Text>
                 <TextInput value={precoUnitario} style={styles.txtInput} onChangeText={(text) => { setPrecoUnitario(text) }}></TextInput>
             </View>
-            <View style={styles.areaBtns}>
+            
                 <Text style={styles.legend}>Categoria</Text>
                 <Picker
                     selectedValue={categoria}
-                    style={styles.selectStyle}
-                    onValueChange={(itemValue) => setCategoria(itemValue)}>
+                    style={styles.pickerStyle}
+                    mode={"dialog"}
+                    onValueChange={(itemValue, itemindex) => setCategoria(itemValue)}>
                     {
                         categorias.map((categoria, index) =>
                         (
-                            <Picker.Item label={categoria} value={categoria} />
+                            <Picker.Item key={index} label={categoria.descricao} value={categoria.descricao} />
                         ))
                     }
+                    
 
                 </Picker>
-            </View>
+           
 
             <View style={styles.sideBtns}>
 
@@ -261,6 +262,8 @@ export default function Produtos() {
 
                 <TouchableOpacity onPress={() => { confirmaApagarTudo() }} style={styles.btnCarregar}><Text>Limpar Todos</Text></TouchableOpacity>
             </View>
+
+            <Text style={styles.legend}>Produtos Cadastrados</Text>
 
             <ScrollView>
                 {
@@ -273,17 +276,4 @@ export default function Produtos() {
             <StatusBar style="auto" />
         </View>
     );
-}
-
-
-function validarSenha(senha, confirmacao) {
-
-    console.log(senha)
-    console.log(confirmacao)
-
-    let retorno = senha === confirmacao ? true : false;
-
-
-    return retorno;
-
 }
