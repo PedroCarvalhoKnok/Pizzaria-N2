@@ -15,7 +15,7 @@ import Venda from '../../Venda';
 
 
 
-export default function Vendas({navigation}) {
+export default function Vendas({ navigation }) {
     const [id, setId] = useState();
     const [descricaoProduto, setDescricaoProduto] = useState();
     const [idProduto, setIdProduto] = useState();
@@ -38,33 +38,23 @@ export default function Vendas({navigation}) {
     async function carregaDados() {
         try {
 
-            let produtosFim = []
+            let dadosResponse = await obtemDadosUnitariosTodasVendas().then(dados => { return dados });
+            produtosFim = [];
 
-            await obtemDadosUnitariosTodasVendas().then((dadosResponse) => {
-                
-                
-                let dadosVendas = dadosResponse;
+            for (venda of dadosResponse) {
 
-                
+                let produtos = await obtemProdutosPorVenda(venda.id);
 
-                dadosVendas.forEach(async venda => {
-                    let produtos = await obtemProdutosPorVenda(venda.id);
+                console.log(produtos)
 
-                    produtosFim = produtos;
+                let precoTotal = produtos.map(produto => produto.precoUnitarioProduto).reduce((acc, amount) => acc + amount);
 
-                    console.log(produtosFim)
-                    
-                    // let precoTotal = produtos.map(produto => produto.precoUnitarioProduto).reduce((acc, amount) => acc + amount);
-                    
-                    // vendas.push({id: venda.id, produtos: produtos, precoTotal: precoTotal, dataVenda: venda.dataVenda})
-                    
-                });
-               
-            });
 
-            //console.log(produtosFim);
+                produtosFim.push({ id: venda.id, produtos: produtos, precoTotal: precoTotal, dataVenda: venda.dataVenda })
+            }
 
-            //setVendas(vendas);
+
+            setVendas(produtosFim);
 
 
         } catch (e) {
