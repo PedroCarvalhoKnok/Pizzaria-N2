@@ -71,7 +71,7 @@ export default function Categorias({navigation}) {
                 let resposta = await alterarCategoria(categoriaObj);
 
                 if (resposta)
-                    Alert.alert(`${categoriaObj} Alterado com sucesso!`);
+                    Alert.alert(`${categoriaObj.descricao} Alterado com sucesso!`);
                 else
                     Alert.alert('Falhou miseravelmente!');
             }

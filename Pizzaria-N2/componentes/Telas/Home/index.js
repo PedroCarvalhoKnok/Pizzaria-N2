@@ -37,13 +37,13 @@ export default function Home({ navigation }) {
             <TouchableOpacity style={styles.botao}
                 onPress={() => navigation.navigate('Produtos')}>
                 <Text>Gerenciamento de Produtos</Text>
-                <MaterialIcons name="local-pizza" size={32} color="white" />
+                <MaterialIcons name="local-parking" size={32} color="white" />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.botao}
                 onPress={() => navigation.navigate('ProdutosVenda')}>
-                <Text>Gerenciamento de Vendas</Text>
-                <MaterialIcons name="add-task" size={32} color="white" />
+                <Text>Cardápio</Text>
+                <MaterialIcons name="local-pizza" size={32} color="white" />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.botao}

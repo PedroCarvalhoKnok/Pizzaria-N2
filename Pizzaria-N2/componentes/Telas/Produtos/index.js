@@ -72,7 +72,7 @@ export default function Produtos({ navigation }) {
                 let resposta = (await adicionaProduto(produtoObj));
 
                 if (resposta)
-                    Alert.alert(`${produtoObj} adicionado com sucesso!`);
+                    Alert.alert(`${produtoObj.descricao} adicionado com sucesso!`);
                 else
                     Alert.alert('Falhou miseravelmente!');
             }
@@ -80,7 +80,7 @@ export default function Produtos({ navigation }) {
                 let resposta = await alteraProduto(produtoObj);
 
                 if (resposta)
-                    Alert.alert(`${produtoObj} Alterado com sucesso!`);
+                    Alert.alert(`${produtoObj.descricao} Alterado com sucesso!`);
                 else
                     Alert.alert('Falhou miseravelmente!');
             }

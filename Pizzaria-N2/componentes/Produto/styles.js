@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
     dadosBotoesAcao: {
         width: '32%',
         flexDirection: 'row',
-        
     },
 
 

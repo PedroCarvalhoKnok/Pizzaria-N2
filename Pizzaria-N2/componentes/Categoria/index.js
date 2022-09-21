@@ -11,6 +11,7 @@ export default function Categoria({ categoria, apagaElemento, carregaEditar }) {
         <View style={styles.usuario}>
 
             <View>
+                <Text style={styles.listaNome}>Descrição</Text>
                 <Text style={styles.listaNome}> {categoria.descricao}</Text>
             </View>
             <View style={styles.dadosBotoesAcao}>
