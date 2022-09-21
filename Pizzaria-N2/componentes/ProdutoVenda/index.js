@@ -6,7 +6,7 @@ import styles from './styles';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 
 
-export default function ProdutoVenda({ produtoVenda, adicionarCarrinho }) {
+export default function ProdutoVenda({ produtoVenda, confirmaAdicionarCarrinho }) {
     return (
         <View style={styles.usuario}>
 
@@ -17,15 +17,13 @@ export default function ProdutoVenda({ produtoVenda, adicionarCarrinho }) {
             </View>
 
             <View>
-            <Text style={styles.listaNome}>Descrição</Text>
-            <Text style={styles.listaNome}>{produtoVenda.descricao}</Text>
-            <Text style={styles.listaNome}>Categoria</Text>
-            <Text style={styles.listaNome}>{produtoVenda.categoria}</Text>
+            <Text style={styles.listaNome}>Descrição {produtoVenda.descricao}</Text>
+            <Text style={styles.listaNome}>Categoria {produtoVenda.categoria}</Text>
             </View>
 
             <View style={styles.dadosBotoesAcao}>
                
-                <TouchableOpacity onPress={() => adicionarCarrinho(produtoVenda)}>
+                <TouchableOpacity onPress={() => confirmaAdicionarCarrinho(produtoVenda)}>
                     <MaterialIcons name="add-shopping-cart" size={32} color="white" />
                 </TouchableOpacity>
 

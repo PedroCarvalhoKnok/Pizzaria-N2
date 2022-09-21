@@ -63,9 +63,9 @@ export default function Carrinhos({ navigation }) {
     return data;
   }
 
-  function formataMes(mes){
-    return mes = mes < 10 ? `0${mes}`: mes;
-    
+  function formataMes(mes) {
+    return mes = mes < 10 ? `0${mes}` : mes;
+
   }
 
   async function efetivarVenda() {
@@ -84,7 +84,7 @@ export default function Carrinhos({ navigation }) {
           categoriaProduto: item.categoria,
           dataVenda: dataVenda,
         });
-        
+
 
         let resposta = await adicionarVenda({
           id: idVenda,
@@ -95,13 +95,13 @@ export default function Carrinhos({ navigation }) {
           dataVenda: dataVenda,
         });
 
-        if (resposta){
-           Alert.alert(`${item.descricao} inserido com sucesso.` );
-           await removerItem(item.id)
+        if (resposta) {
+          Alert.alert(`${item.descricao} inserido com sucesso.`);
+          await removerItem(item.id)
         }
-        else 
-           Alert.alert(`${item.descricao} não foi inserido corretamente!`);
-       
+        else
+          Alert.alert(`${item.descricao} não foi inserido corretamente!`);
+
       });
 
       Keyboard.dismiss();
@@ -193,12 +193,11 @@ export default function Carrinhos({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.mainTitle}>Meu Carrinho</Text>
-      <TouchableOpacity style={styles.botao}
-        onPress={() => navigation.navigate('Home')}>
-        <Text>Menu</Text>
-      </TouchableOpacity>
-
+      <View style={styles.mainTitle}>
+        <MaterialIcons onPress={() => { navigation.navigate('Home') }} name="arrow-back" size={32} color="white" />
+        <Text style={{ fontSize: 20 }}>Meu Carrinho</Text>
+        <Ionicons onPress={() => { navigation.navigate('Carrinhos') }} name="cart" size={32} color="white" />
+      </View>
       <View style={styles.sideBtns}>
         <TouchableOpacity
           onPress={async () => {
@@ -206,28 +205,30 @@ export default function Carrinhos({ navigation }) {
           }}
           style={styles.btnSalvar}
         >
-          <Text>Efetivar venda</Text>
+          <MaterialIcons name="thumb-up" size={32} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={async () => {
             confirmaLimparCarrinho();
           }}
-          style={styles.btnSalvar}
+          style={styles.btnCarregar}
         >
-          <Text>Limpar Carrinho</Text>
+          <MaterialIcons name="cleaning-services" size={32} color="white" />
         </TouchableOpacity>
-        </View>
-
-        <ScrollView>
-          {itensCarrinho.map((item, index) => (
-            <Carrinho
-              item={item}
-              key={index.toString()}
-              confirmaRemoverItem={confirmaRemoverItem}
-            ></Carrinho>
-          ))}
-        </ScrollView>
-        <StatusBar style="auto" />
       </View>
-      );
+
+      <Text style={{ fontSize: 20, marginTop: 40 }}>Itens adicionados</Text>
+
+      <ScrollView style={{marginTop: 40}}>
+        {itensCarrinho.map((item, index) => (
+          <Carrinho
+            item={item}
+            key={index.toString()}
+            confirmaRemoverItem={confirmaRemoverItem}
+          ></Carrinho>
+        ))}
+      </ScrollView>
+      <StatusBar style="auto" />
+    </View>
+  );
 }

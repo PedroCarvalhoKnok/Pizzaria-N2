@@ -2,11 +2,12 @@ import { StyleSheet } from "react-native";
 
 
 const styles = StyleSheet.create({
-    container: {
+    usuario: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        width: 100
     },
     legend: {
         fontSize: 30,
@@ -48,6 +49,10 @@ const styles = StyleSheet.create({
         color: 'white',
         alignItems: 'center',
         
+    },
+    listaNome: {
+        fontSize: 20,
+        textAlign: 'center'
     },
     btnCarregar: {
         width: 100,

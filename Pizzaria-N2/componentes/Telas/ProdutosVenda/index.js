@@ -44,6 +44,24 @@ export default function ProdutosVenda({navigation}) {
 
     }
 
+    function confirmaAdicionarCarrinho(produtoVenda) {
+       
+        
+        Alert.alert('Atenção', `Confirmar a adição do produto ${produtoVenda.descricao} no carrinho ?`,
+            [
+                {
+                    text: 'Sim',
+                    onPress: () => adicionarCarrinho(produtoVenda),
+                },
+                {
+                    text: 'Não',
+                    style: 'cancel',
+                }
+            ])
+
+
+    }
+
 
     async function adicionarCarrinho(produtoVenda) {
 
@@ -104,17 +122,11 @@ export default function ProdutosVenda({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Gerenciamento de Vendas</Text>
-            
-            <TouchableOpacity style={styles.botao}
-                onPress={() => navigation.navigate('Home')}>
-                <Text>Menu</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.botao}
-                onPress={() => navigation.navigate('Carrinhos')}>
-                <Text>Carrinho</Text>
-            </TouchableOpacity>
-
+            <View style={styles.mainTitle}>
+                <MaterialIcons onPress={() => {navigation.navigate('Home')}} name="arrow-back" size={32} color="white" />
+                <Text style={{fontSize: 20}}>Catálogo</Text>
+                <Ionicons onPress={() => {navigation.navigate('Carrinhos')}} name="cart" size={32} color="white" />
+            </View>
 
 
             <Text style={styles.legend}>Filtrar por Categoria</Text>
@@ -132,17 +144,15 @@ export default function ProdutosVenda({navigation}) {
 
             </Picker>
 
-            <TouchableOpacity onPress={() => { filtrarProdutosCategoria() }} style={styles.btnCarregar}><Text>Listar Todos</Text></TouchableOpacity>
-
-
+            <TouchableOpacity onPress={() => { filtrarProdutosCategoria() }} style={styles.btnCarregar}><MaterialIcons name="search" size={32} color="white" /></TouchableOpacity>
 
 
             <Text style={styles.legend}>Produtos Disponíveis</Text>
-            <ScrollView>
+            <ScrollView style={{marginTop: 20}}>
                 {
                     produtosVenda.map((produtoVenda, index) =>
                     (
-                        <ProdutoVenda produtoVenda={produtoVenda} key={index.toString()} adicionarCarrinho={adicionarCarrinho}></ProdutoVenda>
+                        <ProdutoVenda produtoVenda={produtoVenda} key={index.toString()} confirmaAdicionarCarrinho={confirmaAdicionarCarrinho}></ProdutoVenda>
                     ))
                 }
             </ScrollView>

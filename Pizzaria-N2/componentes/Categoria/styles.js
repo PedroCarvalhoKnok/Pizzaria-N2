@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     dadosBotoesAcao: {
-        width: '40%',
+        width: '30%',
         flexDirection: 'row',
         
     },

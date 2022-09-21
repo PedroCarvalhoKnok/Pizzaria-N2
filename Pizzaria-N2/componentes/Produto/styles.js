@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 
 const styles = StyleSheet.create({
-    container: {
+    usuario: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
         borderBottomColor: '#5eb528',
         marginTop:10
 
+    },
+    listaNome: {
+        fontSize: 15
     },
     mainTitle: {
         fontSize: 25,
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     dadosBotoesAcao: {
-        width: '42%',
+        width: '32%',
         flexDirection: 'row',
         
     },

@@ -64,13 +64,13 @@ export default function Vendas({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Minhas Vendas</Text>
-            <TouchableOpacity style={styles.botao}
-                onPress={() => navigation.navigate('Home')}>
-                <Text>Menu</Text>
-            </TouchableOpacity>
+            <View style={styles.mainTitle}>
+                <MaterialIcons onPress={() => {navigation.navigate('Home')}} name="arrow-back" size={32} color="white" />
+                <Text style={{fontSize: 20}}>Minhas Vendas</Text>
+                <Ionicons onPress={() => {navigation.navigate('Carrinhos')}} name="cart" size={32} color="white" />
+            </View>
 
-            <ScrollView>
+            <ScrollView style={{marginTop: 50}}>
                 {
                     vendas.map((venda, index) =>
                     (

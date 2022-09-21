@@ -1,5 +1,5 @@
 import { react, useState, useEffect  } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import styles from './styles';
 
@@ -31,7 +31,8 @@ export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.titulo}>No Ponto Pizzas</Text>
+           
+            <Image style={{height: 200, width: 200, marginBottom: 50, borderRadius: 10}} source={require('../../../assets/nopontologo.png')} />
 
             <TouchableOpacity style={styles.botao}
                 onPress={() => navigation.navigate('Produtos')}>

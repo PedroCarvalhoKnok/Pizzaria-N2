@@ -12,12 +12,14 @@ export default function Produto({ produto, apagaElemento, carregaEditar }) {
 
 
             <View>
+                <Text style={styles.listaNome}> Descrição</Text>
                 <Text style={styles.listaNome}> {produto.descricao}</Text>
             </View>
 
-            <View>
-                <Text style={styles.listaNome}> {produto.categoria}</Text>
-                <Text style={styles.listaNome}> {produto.precoUnitario}</Text>
+            <View style={{flexDirection: 'column'}}>
+                
+                <Text style={styles.listaNome}>Categoria {produto.categoria}</Text>
+                <Text style={styles.listaNome}>Preço {produto.precoUnitario}</Text>
             </View>
             <View style={styles.dadosBotoesAcao}>
                 <TouchableOpacity onPress={() => apagaElemento(produto.id)}>

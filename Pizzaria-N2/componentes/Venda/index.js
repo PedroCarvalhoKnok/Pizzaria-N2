@@ -7,8 +7,9 @@ import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
 export default function Venda({ venda, produtos }) {
   return (
     <View style={styles.usuario}>
-      <View>
-        <Text style={styles.listaNome}>Venda {venda.id}</Text>
+      <View style={{flexDirection: 'column', alignContent: 'center'}}>
+        <Text style={styles.listaNome}>Venda</Text>
+        <Text style={styles.listaNome}>{venda.id}</Text>
       </View>
      
 
@@ -16,16 +17,18 @@ export default function Venda({ venda, produtos }) {
         <Text style={styles.listaNome}>Itens vendidos</Text>
       </View>
 
-      <ScrollView>
+      <ScrollView style={{width: 200, height: 200}}>
         {produtos.map((produto, index) => (
           <ItensVenda key={index} produto={produto}></ItensVenda>
         ))}
       </ScrollView>
 
 
-      <View>
-        <Text style={styles.listaNome}>Preço Total: {venda.precoTotal}</Text>
-        <Text style={styles.listaNome}>Data da venda: {venda.dataVenda}</Text>
+      <View style={{flexDirection: 'column', alignContent: 'center', }}>
+        <Text style={styles.listaNome}>Preço Total</Text>
+        <Text style={styles.listaNome}>R$ {venda.precoTotal}</Text>
+        <Text style={styles.listaNome}>Data da venda</Text>
+        <Text style={styles.listaNome}>{venda.dataVenda}</Text>
       </View>
 
      

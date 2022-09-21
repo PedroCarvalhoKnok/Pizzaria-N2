@@ -184,11 +184,11 @@ export default function Categorias({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Gerenciamento de Categorias</Text>
-            <TouchableOpacity style={styles.botao}
-                onPress={() => navigation.navigate('Home')}>
-                <Text>Menu</Text>
-            </TouchableOpacity>
+            <View style={styles.mainTitle}>
+                <MaterialIcons onPress={() => {navigation.navigate('Home')}} name="arrow-back" size={32} color="white" />
+                <Text style={{fontSize: 20}}>Gerenciamento de Categorias</Text>
+                <Ionicons onPress={() => {navigation.navigate('Carrinhos')}} name="cart" size={32} color="white" />
+            </View>
 
             <View style={styles.areaBtns}>
 
@@ -199,14 +199,16 @@ export default function Categorias({navigation}) {
 
             <View style={styles.sideBtns}>
 
-                <TouchableOpacity onPress={async () => { salvarCategoria() }} style={styles.btnSalvar}><Text>Salvar</Text></TouchableOpacity>
+                <TouchableOpacity onPress={async () => { salvarCategoria() }} style={styles.btnSalvar}><MaterialIcons name="save" size={32} color="white" /></TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { limparCampos() }} style={styles.btnCarregar}><Text>Limpar</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { limparCampos() }} style={styles.btnCarregar}><MaterialIcons name="cleaning-services" size={32} color="white" /></TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { confirmaApagarTudo() }} style={styles.btnCarregar}><Text>Limpar Todos</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { confirmaApagarTudo() }} style={styles.btnCarregar}><MaterialIcons name="clear" size={32} color="white" /></TouchableOpacity>
             </View>
 
-            <ScrollView>
+            <Text style={styles.legend}>Categorias cadastradas</Text>
+
+            <ScrollView style={{marginTop: 20}}>
                 {
                     categorias.map((categoria, index) =>
                     (

@@ -11,12 +11,13 @@ export default function Carrinho({ item, confirmaRemoverItem }) {
         <View style={styles.usuario}>
 
             <View>
+                <Text style={styles.listaNome}>Descrição</Text>
                 <Text style={styles.listaNome}> {item.descricao}</Text>
-                <Text style={styles.listaNome}> {item.precoUnitario}</Text>
             </View>
 
             <View>
-                <Text style={styles.listaNome}> {item.categoria}</Text>
+                <Text style={styles.listaNome}>Categoria {item.categoria}</Text>
+                <Text style={styles.listaNome}>Preço {item.precoUnitario}</Text>
             </View>
 
             <View style={styles.dadosBotoesAcao}>

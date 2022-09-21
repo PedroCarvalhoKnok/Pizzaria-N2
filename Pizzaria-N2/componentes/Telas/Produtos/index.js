@@ -109,7 +109,7 @@ export default function Produtos({ navigation }) {
                 let categorias = categoriasResponse;
                 console.log(categorias)
 
-                if(categorias.length > 0)
+                if (categorias.length > 0)
                     setCategoria(categorias[0].descricao);
 
                 setCategorias(categorias);
@@ -218,17 +218,15 @@ export default function Produtos({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Gerenciamento de Produtos</Text>
-            <TouchableOpacity style={styles.botao}
-                onPress={() => navigation.navigate('Home')}>
-                <Text>Menu</Text>
-            </TouchableOpacity>
+            <View style={styles.mainTitle}>
+                <MaterialIcons onPress={() => {navigation.navigate('Home')}} name="arrow-back" size={32} color="white" />
+                <Text style={{fontSize: 20}}>Gerenciamento de Produtos</Text>
+                <Ionicons onPress={() => {navigation.navigate('Carrinhos')}} name="cart" size={32} color="white" />
+            </View>
 
             <View style={styles.areaBtns}>
                 <Text style={styles.legend}>Descrição</Text>
                 <TextInput value={descricao} style={styles.txtInput} onChangeText={(text) => { setDescricao(text) }}></TextInput>
-
-
             </View>
 
             <View style={styles.areaBtns}>
@@ -236,31 +234,31 @@ export default function Produtos({ navigation }) {
                 <Text style={styles.legend}>Preço unitário</Text>
                 <TextInput value={precoUnitario} style={styles.txtInput} onChangeText={(text) => { setPrecoUnitario(text) }}></TextInput>
             </View>
-            
-                <Text style={styles.legend}>Categoria</Text>
-                <Picker
-                    selectedValue={categoria}
-                    style={styles.pickerStyle}
-                    mode={"dialog"}
-                    onValueChange={(itemValue, itemindex) => setCategoria(itemValue)}>
-                    {
-                        categorias.map((categoria, index) =>
-                        (
-                            <Picker.Item key={index} label={categoria.descricao} value={categoria.descricao} />
-                        ))
-                    }
-                    
 
-                </Picker>
-           
+            <Text style={styles.legend}>Categoria</Text>
+            <Picker
+                selectedValue={categoria}
+                style={styles.pickerStyle}
+                mode={"dialog"}
+                onValueChange={(itemValue, itemindex) => setCategoria(itemValue)}>
+                {
+                    categorias.map((categoria, index) =>
+                    (
+                        <Picker.Item key={index} label={categoria.descricao} value={categoria.descricao} />
+                    ))
+                }
+
+
+            </Picker>
+
 
             <View style={styles.sideBtns}>
 
-                <TouchableOpacity onPress={async () => { salvarProduto() }} style={styles.btnSalvar}><Text>Salvar</Text></TouchableOpacity>
+                <TouchableOpacity onPress={async () => { salvarProduto() }} style={styles.btnSalvar}><MaterialIcons name="save" size={32} color="white" /></TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { limparCampos() }} style={styles.btnCarregar}><Text>Limpar</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { limparCampos() }} style={styles.btnCarregar}><MaterialIcons name="cleaning-services" size={32} color="white" /></TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { confirmaApagarTudo() }} style={styles.btnCarregar}><Text>Limpar Todos</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { confirmaApagarTudo() }} style={styles.btnCarregar}><MaterialIcons name="clear" size={32} color="white" /></TouchableOpacity>
             </View>
 
             <Text style={styles.legend}>Produtos Cadastrados</Text>

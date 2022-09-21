@@ -4,14 +4,15 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#143ec9',
+        backgroundColor: '#ff5050',
         alignItems: 'center',
         justifyContent: 'center',
     },
     legend: {
-        fontSize: 30,
-        color: '#2B6F89',
+        fontSize: 20,
+        color: 'white',
         fontWeight: 'bold',
+        marginTop: 20
     },
     txtInput: {
         width: '70%',
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         borderBottomWidth: 5,
-        borderBottomColor: '#5eb528',
+        borderBottomColor: '#ffa64d',
         marginTop: 10
 
     },
@@ -32,39 +33,45 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         width: '70%',
         textAlign: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        textAlign: 'center',
+        borderBottomWidth: 5,
+        borderBottomColor: '#ffa64d',
     },
     mainTitle: {
-        fontSize: 25,
         fontWeight: 'bold',
-        width: '90%',
-        backgroundColor: 'black',
+        width: '100%',
+        height: 90,
+        backgroundColor: '#ffa64d',
         padding: 5,
         paddingTop: '10%',
         textAlign: "center",
         color: "#FFF",
-        borderRadius: 5
+        borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
     },
     btnSalvar: {
         width: 100,
         height: 50,
         borderRadius: 10,
-        backgroundColor: "blue",
+        backgroundColor: "#ffa64d",
         justifyContent: "center",
         alignContent: "center",
         color: 'white',
         alignItems: 'center',
-
+        marginRight: 10
     },
     btnCarregar: {
         width: 100,
         height: 50,
         borderRadius: 10,
-        backgroundColor: "blue",
+        backgroundColor: "#ffa64d",
         justifyContent: "center",
         alignContent: "center",
         color: 'white',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 10
     },
     sideView: {
         flexDirection: 'row',
@@ -74,10 +81,10 @@ const styles = StyleSheet.create({
     },
     sideBtns: {
         flexDirection: 'row',
-        justifyContent: "space-between",
+        justifyContent: 'space-evenly',
     },
     areaBtns: {
-        marginTop: 0,
+        marginTop: 30,
         justifyContent: "space-between",
         flexDirection: 'column',
         width: "100%",

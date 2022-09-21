@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
         color: "#FFF",
         borderRadius: 5
     },
+    listaNome: {
+        fontSize: 15
+    },
     btnSalvar: {
         width: 100,
         height: 50,
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     dadosBotoesAcao: {
-        width: '42%',
+        width: '30%',
         flexDirection: 'row',
         
     },

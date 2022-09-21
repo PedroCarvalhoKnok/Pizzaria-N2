@@ -80,13 +80,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#ed8f1c',
         flexDirection: 'column',
         justifyContent: "space-between",
-        height: 80,
+        height: 100,
         width: '100%',
         alignItems: 'center',
         margin: 10,
         borderRadius: 10,
         shadowColor: "#000",
         
+    },
+    listaNome: {
+        fontSize: 20
     },
     listaCampo: {
         width: '50%',
